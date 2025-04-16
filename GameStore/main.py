@@ -9,18 +9,18 @@ app = FastAPI()
 
 # Add CORS middleware to allow requests from all origins
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods
-    allow_headers=["*"],  # Allow all headers
+  CORSMiddleware,
+  allow_origins=["*"],  # Allow all origins
+  allow_credentials=True,
+  allow_methods=["*"],  # Allow all HTTP methods
+  allow_headers=["*"],  # Allow all headers
 )
 
 
 # Create tables at startup
 @app.on_event("startup")
 def startup():
-    Base.metadata.create_all(bind=engine)
+  Base.metadata.create_all(bind=engine)
 
 
 # Include the routers
@@ -31,11 +31,11 @@ app.include_router(game_router)
 # Sample endpoint
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the GameStore API"}
+  return {"message": "Welcome to the GameStore API"}
 
 
 # Run the app using Uvicorn
 if __name__ == "__main__":
-    import uvicorn
+  import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+  uvicorn.run(app, host="0.0.0.0", port=8000)
